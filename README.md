@@ -24,7 +24,7 @@ cd RealityFilter
 http-server
 ```
 
-Open http://localhost:8080 in your browser.
+Open [http://localhost:8080](http://localhost:8080) in your browser.
 
 ## Github pages
 
