@@ -3,7 +3,7 @@ Reality Filter
 
 A demo showing how to use HTML5, JavaScript, WebGL ~~and Google Cardboard~~ to create a manipulated view of the world around you via your phone's front camera.
 
-# Local testing
+# Testing your code
 
 Browsers impose restrictions on using the camera from file:// protocols, so you can't just open index.html in your browser, you have to serve it on a server.  
 _You can use any server to serve the root of this project_.  
@@ -31,11 +31,6 @@ Open http://localhost:8080 in your browser.
 This repo is configured to use the special `gh-pages` branch instead of master. This creates a github pages site for your project.
 
 To test your code simply push it to github, and access it at `https://<your-username>.github.io/RealityFilter/`. ex: https://danmana.github.io/RealityFilter/
-
-
-
-
-
 
 
 ---
