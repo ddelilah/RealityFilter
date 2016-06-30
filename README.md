@@ -3,6 +3,14 @@ Reality Filter
 
 A demo showing how to use HTML5, JavaScript, WebGL ~~and Google Cardboard~~ to create a manipulated view of the world around you via your phone's front camera.
 
+# Adding new filters
+
+Each new filter needs to be pushed in the global `themes` array. Each filter has a name, an author and a draw(canvas,context) function. See `/js/themes/example-inverse.js` for a basic filter.
+
+* copy `/js/themes/example-inverse.js` and make your changes
+* add the script in index.html
+
+
 # Testing your code
 
 Browsers impose restrictions on using the camera from file:// protocols, so you can't just open index.html in your browser, you have to serve it on a server.  
