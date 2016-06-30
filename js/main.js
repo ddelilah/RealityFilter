@@ -7,8 +7,8 @@ var scene,
   video,
   canvas,
   context,
-  themes = [],
-  currentTheme = 0,
+  filters = [],
+  currentFilter = 0,
   lookingAtGround = false;
 
 init();
@@ -32,7 +32,7 @@ if (window.DeviceOrientationEvent) {
   window.addEventListener('deviceorientation', function(evt) {
     if (evt.gamma > -1 && evt.gamma < 1 && !lookingAtGround) {
       lookingAtGround = true;
-      currentTheme = (themes.length > currentTheme+1) ? currentTheme+1 : 0;
+      currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
 
       setTimeout(function() {
         lookingAtGround = false;
@@ -42,10 +42,10 @@ if (window.DeviceOrientationEvent) {
 }
 
 setInterval(function(){
-    currentTheme = (themes.length > currentTheme+1) ? currentTheme+1 : 0;
+    currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
 }, 6000);
 document.addEventListener('click', function(){
-    currentTheme = (themes.length > currentTheme+1) ? currentTheme+1 : 0;
+    currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
 })
 
 video = document.createElement('video');
@@ -125,8 +125,8 @@ function animate() {
     if (context) {
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      if (themes.length && themes[currentTheme]){
-        var filter = themes[currentTheme];
+      if (filters.length && filters[currentFilter]){
+        var filter = filters[currentFilter];
         filter.draw(canvas, context);
       }
 

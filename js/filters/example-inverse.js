@@ -1,4 +1,4 @@
-themes.push({
+filters.push({
 	name : 'inverse',
 	author : 'patcat',
 	draw : function (canvas, context) {

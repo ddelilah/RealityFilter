@@ -1,4 +1,4 @@
-themes.push({
+filters.push({
 	name : 'blackandwhite',
 	author : 'patcat',
 	draw : function (canvas, context) {

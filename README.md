@@ -5,9 +5,9 @@ A demo showing how to use HTML5, JavaScript, WebGL ~~and Google Cardboard~~ to c
 
 # Adding new filters
 
-Each new filter needs to be pushed in the global `themes` array. Each filter has a name, an author and a draw(canvas,context) function. See `/js/themes/example-inverse.js` for a basic filter.
+Each new filter needs to be pushed in the global `fitlers` array. Each filter has a name, an author and a draw(canvas,context) function. See `/js/filters/example-inverse.js` for a basic filter.
 
-* copy `/js/themes/example-inverse.js` and make your changes
+* copy `/js/filters/example-inverse.js` and make your changes
 * add the script in index.html
 
 
