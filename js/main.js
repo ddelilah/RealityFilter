@@ -9,7 +9,8 @@ var scene,
   context,
   filters = [],
   currentFilter = 0,
-  lookingAtGround = false;
+  lookingAtGround = false,
+  MOCK_VIDEO = '/videos/Shopping Mall - 1887.mp4';
 
 init();
 
@@ -61,7 +62,8 @@ navigator.getUserMedia = navigator.getUserMedia ||
 navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
 if (typeof MediaStreamTrack === 'undefined' && navigator.getUserMedia) {
-  alert('This browser doesn\'t support this demo :(');
+  console.error('This browser doesn\'t support this demo :(');
+  initVideo(MOCK_VIDEO);
 } else {
   MediaStreamTrack.getSources(function(sources) {
     for (var i = 0; i !== sources.length; ++i) {
@@ -78,8 +80,13 @@ if (typeof MediaStreamTrack === 'undefined' && navigator.getUserMedia) {
 }
 
 function streamFound(stream) {
+    initVideo(URL.createObjectURL(stream));
+}
+
+
+function initVideo(src) {
   document.body.appendChild(video);
-  video.src = URL.createObjectURL(stream);
+  video.src = src;
   video.style.width = '100%';
   video.style.height = '100%';
   video.play();
@@ -113,8 +120,11 @@ function streamFound(stream) {
   scene.add(cameraMesh);
 }
 
+
 function streamError(error) {
   console.log('Stream error: ', error);
+  console.log('Using default video as source');
+  initVideo(MOCK_VIDEO);
 }
 
 animate();

@@ -1,4 +1,6 @@
-filters.push({
+(function(){
+
+window.filters.push({
 	name : 'sepia',
 	author : 'patcat',
 	draw : function (canvas, context) {
@@ -37,3 +39,7 @@ filters.push({
 		context.putImageData(imageData, 0, 0);
 	}
 });
+
+
+
+}());

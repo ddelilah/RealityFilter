@@ -1,4 +1,6 @@
-filters.push({
+(function(){
+
+window.filters.push({
 	name : 'inverse',
 	author : 'patcat',
 	draw : function (canvas, context) {
@@ -23,3 +25,7 @@ filters.push({
 		context.putImageData(imageData, 0, 0);
 	}
 });
+
+
+
+}());

@@ -1,4 +1,6 @@
-filters.push({
+(function(){
+
+window.filters.push({
 	name : 'blackandwhite',
 	author : 'patcat',
 	draw : function (canvas, context) {
@@ -38,3 +40,6 @@ filters.push({
 		context.putImageData(imageData, 0, 0);
 	}
 });
+
+
+}());
