@@ -1,10 +1,10 @@
 (function(){
 
 var pinkCanvas = document.createElement('canvas');
-
+// TODO: remove hardcoded values
 pinkCanvas.width = 1000;
-		pinkCanvas.height = 1000;
-		var pinkContext = pinkCanvas.getContext('2d');
+pinkCanvas.height = 1000;
+var pinkContext = pinkCanvas.getContext('2d');
 
 function isMagenta(r,g,b) {
     var threshold = 20,
