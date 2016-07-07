@@ -78,6 +78,8 @@
       for ( var i=0, len = options.length; i < len; i++ ) {
         cp.renderClosePixels( options[i] );
       }
+
+      pCanvas.imgData = null;
     },
     renderClosePixels: function(opts) {
       var w = pCanvas.canvas.width

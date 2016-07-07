@@ -1,53 +1,22 @@
-var scene,
-  camera,
-  renderer,
-  element,
+var
   container,
-  effect,
   video,
   canvas,
   context,
   filters = [],
   currentFilter = 0,
-  lookingAtGround = false,
   MOCK_VIDEO = '/videos/Shopping Mall - 1887.mp4';
 
 init();
 
 function init() {
-scene = new THREE.Scene();
-camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.001, 700);
-camera.position.set(0, 15, 0);
-scene.add(camera);
-
-renderer = new THREE.WebGLRenderer();
-element = renderer.domElement;
 container = document.getElementById('webglviewer');
-//container.appendChild(element);
-
-effect = new THREE.StereoEffect(renderer);
-
-element.addEventListener('click', fullscreen, false);
-
-if (window.DeviceOrientationEvent) {
-  window.addEventListener('deviceorientation', function(evt) {
-    if (evt.gamma > -1 && evt.gamma < 1 && !lookingAtGround) {
-      lookingAtGround = true;
-      currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
-
-      setTimeout(function() {
-        lookingAtGround = false;
-      }, 4000);
-    }
-  }.bind(this));
-}
 
 setInterval(function(){
     currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
 }, 6000);
-document.addEventListener('click', function(){
-    currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
-})
+document.addEventListener('click', fullscreen, false);
+window.addEventListener('resize', resize, false);
 
 video = document.createElement('video');
 video.setAttribute('autoplay', true);
@@ -87,37 +56,17 @@ function streamFound(stream) {
 function initVideo(src) {
   document.body.appendChild(video);
   video.src = src;
-  video.style.width = '100%';
-  video.style.height = '100%';
+  video.style.width = '100vw';
+  video.style.height = '100vh';
   video.play();
 
   canvas = document.createElement('canvas');
+  canvas._firstPaint = true;
   canvas.width = video.clientWidth;
   canvas.height = video.clientHeight;
-  canvas.width = nextPowerOf2(canvas.width);
-  canvas.height = nextPowerOf2(canvas.height);
   container.appendChild(canvas);
 
-  function nextPowerOf2(x) {
-      return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2)));
-  }
-
   context = canvas.getContext('2d');
-  texture = new THREE.Texture(canvas);
-  texture.context = context;
-
-  // If you do not use powersOf2, or you want to adjust things more, you could use these:
-  //texture.minFilter = THREE.LinearMipMapLinearFilter;
-  //texture.magFilter = THREE.NearestFilter;
-
-  var cameraPlane = new THREE.PlaneBufferGeometry(1920, 1280);
-
-  cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
-    color: 0xffffff, opacity: 1, map: texture
-  }));
-  cameraMesh.position.z = -600;
-
-  scene.add(cameraMesh);
 }
 
 
@@ -128,49 +77,37 @@ function streamError(error) {
 }
 
 animate();
+
 }
 
-
 function animate() {
-    if (context) {
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    if (context && video.readyState === video.HAVE_ENOUGH_DATA) {
+        if (canvas._firstPaint) {
+            canvas._firstPaint = false;
+            resize();
+        }
+        try {
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      if (filters.length && filters[currentFilter]){
-        var filter = filters[currentFilter];
-        filter.draw(canvas, context);
-      }
+            if (filters.length && filters[currentFilter]){
+                var filter = filters[currentFilter];
+                filter.draw(canvas, context);
+            }
+        } catch(e){
+            console.error(e);
+        }
 
-      if (video.readyState === video.HAVE_ENOUGH_DATA) {
-        texture.needsUpdate = true;
-      }
     }
 
     requestAnimationFrame(animate);
-
-    update();
-    render();
 }
 
 function resize() {
-var width = container.offsetWidth;
-var height = container.offsetHeight;
-
-camera.aspect = width / height;
-camera.updateProjectionMatrix();
-
-renderer.setSize(width, height);
-effect.setSize(width, height);
+    canvas.width = video.clientWidth;
+  canvas.height = video.clientHeight;
 }
 
-function update(dt) {
-resize();
 
-camera.updateProjectionMatrix();
-}
-
-function render(dt) {
-effect.render(scene, camera);
-}
 
 function fullscreen() {
 if (container.requestFullscreen) {
@@ -182,4 +119,5 @@ if (container.requestFullscreen) {
 } else if (container.webkitRequestFullscreen) {
   container.webkitRequestFullscreen();
 }
+
 }
