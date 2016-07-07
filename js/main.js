@@ -1,8 +1,10 @@
 var
   container,
   video,
+  canvasBuffer,
   canvas,
   context,
+  contextBuffer,
   filters = [],
   currentFilter = 0,
   MOCK_VIDEO = '/videos/Shopping Mall - 1887.mp4';
@@ -53,20 +55,34 @@ function streamFound(stream) {
 }
 
 
+
 function initVideo(src) {
   document.body.appendChild(video);
   video.src = src;
-  video.style.width = '100vw';
-  video.style.height = '100vh';
+  video.style.width = 'auto';
+  video.style.height = 'auto';
+
+  video.addEventListener( "loadedmetadata", function (e) {
+      canvasBuffer.width = this.videoWidth,
+      canvasBuffer.height = this.videoHeight;
+  }, false );
+
+
   video.play();
 
   canvas = document.createElement('canvas');
-  canvas._firstPaint = true;
-  canvas.width = video.clientWidth;
-  canvas.height = video.clientHeight;
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
   container.appendChild(canvas);
 
   context = canvas.getContext('2d');
+
+
+  canvasBuffer = document.createElement('canvas');
+  canvasBuffer.width = video.clientWidth;
+  canvasBuffer.height = video.clientHeight;
+  // do not add this in the dom, it is just an in memory buffer
+  contextBuffer = canvasBuffer.getContext('2d');
 }
 
 
@@ -80,18 +96,21 @@ animate();
 
 }
 
+var fullscreenCanvas = document.createElement('canvas');
+fullscreenCanvas.width = 1920;
+fullscreenCanvas.height = 1080;
+container.appendChild(c2);
 function animate() {
     if (context && video.readyState === video.HAVE_ENOUGH_DATA) {
-        if (canvas._firstPaint) {
-            canvas._firstPaint = false;
-            resize();
-        }
         try {
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            contextBuffer.drawImage(video, 0, 0, canvasBuffer.width, canvasBuffer.height);
 
             if (filters.length && filters[currentFilter]){
                 var filter = filters[currentFilter];
-                filter.draw(canvas, context);
+                var copyBufferToCanvas = filter.draw(canvasBuffer, contextBuffer, canvas, context);
+                if (copyBufferToCanvas !== false) {
+                    context.drawImage(canvasBuffer,0,0,canvas.width,canvas.height);
+                }
             }
         } catch(e){
             console.error(e);
@@ -103,8 +122,10 @@ function animate() {
 }
 
 function resize() {
-    canvas.width = video.clientWidth;
-  canvas.height = video.clientHeight;
+  canvas.width = document.documentElement.clientWidth;
+  canvas.height = document.documentElement.clientHeight;
+  canvasBuffer.width = video.clientWidth;
+  canvasBuffer.height = video.clientHeight;
 }
 
 
