@@ -96,10 +96,6 @@ animate();
 
 }
 
-var fullscreenCanvas = document.createElement('canvas');
-fullscreenCanvas.width = 1920;
-fullscreenCanvas.height = 1080;
-container.appendChild(c2);
 function animate() {
     if (context && video.readyState === video.HAVE_ENOUGH_DATA) {
         try {
