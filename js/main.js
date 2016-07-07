@@ -90,6 +90,7 @@ function streamError(error) {
   console.log('Stream error: ', error);
   console.log('Using default video as source');
   initVideo(MOCK_VIDEO);
+  video.loop = true;
 }
 
 animate();
