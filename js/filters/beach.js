@@ -5,7 +5,7 @@ var video = document.createElement('video');
 video.style.width = 'auto';
 video.style.height = 'auto';
 video.class = 'video';
-video.src = '/videos/Waves - 1893.mp4'
+video.src = 'https://github.com/danmana/RealityFilter/raw/gh-pages/videos/Waves%20-%201893.mp4'
 video.loop = 'loop';
 video.play();
 
