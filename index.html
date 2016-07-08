@@ -13,10 +13,15 @@
       #webglviewer {
         bottom: 0;
         left: 0;
-        position: absolute;
+        position: relative;
         right: 0;
         top: 0;
-        z-index: 100;
+        -z-index: 100;
+      }
+      #webglviewer canvas, .video {
+        position: absolute;
+        top: 0;
+        left: 0;
       }
     </style>
   </head>
@@ -37,11 +42,12 @@
 
 
     <!-- add your filters here -->
-    <script src="./js/filters/example-arcade.js"></script>
+    <script src="./js/filters/beach.js"></script>
+    <!--<script src="./js/filters/example-arcade.js"></script>
     <script src="./js/filters/example-blackandwhite.js"></script>
     <script src="./js/filters/example-inverse.js"></script>
     <script src="./js/filters/example-sepia.js"></script>
-    <script src="./js/filters/example-color-flow.js"></script>
+    <script src="./js/filters/example-color-flow.js"></script>-->
     <script src="./js/filters/vidi-mirror.js"></script>
     <script src="./js/filters/vidi-baw.js"></script>
     <script src="./js/filters/vidi-trippin.js"></script>
