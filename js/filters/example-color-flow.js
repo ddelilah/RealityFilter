@@ -31,16 +31,9 @@ function isCyan(r, g, b) {
     return dx * dx + dy * dy + dz * dz < 6400;
   }
 
-function saturate(d,i,r,g,b) {
-    var value = 1.75;
-    var gray = 0.2989*r + 0.5870*g + 0.1140*b; //weights from CCIR 601 spec
-    d[i] = clamp(-gray * value + r * (1+value));
-    d[i+1] = clamp(-gray * value + g * (1+value));
-    d[i+2] = clamp(-gray * value + b * (1+value));
-}
 
 function isYellow(r, g, b) {
-    var threshold = 50,
+    var threshold = 40,
       dx = r - 255,
       dy = g - 255,
       dz = b - 0;
@@ -50,6 +43,15 @@ function isYellow(r, g, b) {
     }
     return dx * dx + dy * dy + dz * dz < 10000;
   }
+
+function saturate(d,i,r,g,b) {
+    var value = 1.75;
+    var gray = 0.2989*r + 0.5870*g + 0.1140*b; //weights from CCIR 601 spec
+    d[i] = clamp(-gray * value + r * (1+value));
+    d[i+1] = clamp(-gray * value + g * (1+value));
+    d[i+2] = clamp(-gray * value + b * (1+value));
+}
+
 
 function clamp(color) {
     return Math.min(Math.max(Math.floor(color),0),255)
