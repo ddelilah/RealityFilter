@@ -21,9 +21,9 @@ init();
 function init() {
 container = document.getElementById('webglviewer');
 
-// setInterval(function(){
-//      currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
-// }, 6000);
+setInterval(function(){
+     currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
+}, 6000);
 
 leapController.on("gesture", function(gesture) {
     // change filters by swiping
