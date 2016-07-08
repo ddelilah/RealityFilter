@@ -6,8 +6,8 @@ tempCanvas.height=1000;
 var tempContext = tempCanvas.getContext('2d');
 
 window.filters.push({
-	name : 'inverse',
-	author : 'patcat',
+	name : 'convolving',
+	author : 'vidi',
 	draw : function (canvas, context) {
 	    // get the raw image data
 		var imageData = Filters.getPixels(canvas);

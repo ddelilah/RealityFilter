@@ -3,8 +3,8 @@
 var startTime = Date.now();
 
 window.filters.push({
-	name : 'inverse',
-	author : 'patcat',
+	name : 'baw',
+	author : 'vidi',
 	draw : function (canvas, context) {
 	    // get the raw image data
 		var imageData = context.getImageData(0, 0, canvas.width, canvas.height);

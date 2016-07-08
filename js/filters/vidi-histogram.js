@@ -39,8 +39,8 @@ document.onkeydown = function(e) {
 };
 
 window.filters.push({
-	name : 'inverse',
-	author : 'patcat',
+	name : 'histogram',
+	author : 'vidi',
 	draw : function (canvas, context) {
 	    // get the raw image data
 		var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
