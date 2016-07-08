@@ -6,7 +6,7 @@ tempCanvas.height=1000;
 var tempContext = tempCanvas.getContext('2d');
 
 window.filters.push({
-	name : 'convolving',
+	name : 'trippin',
 	author : 'vidi',
 	draw : function (canvas, context) {
 	    // get the raw image data
@@ -15,13 +15,7 @@ window.filters.push({
 
 		var	otherImageData = Filters.sobel(imageData);
 		var tempData = tempContext.getImageData(0,0,imageData.width, imageData.height);
-// var tD = tempData.data;
-// for (i=0;i<tempData.data.length;i+=4){
-// tD[i+3] = Math.floor(tD[i+3]*0.5);
-//
-// }
 
-// tempData.data = tD;
 tempData = Filters.brightnessContrast(tempData,-0.1,1);
 tempData = Filters.gaussianBlur(tempData, 10);
 tempData = Filters.screenBlend(tempData, otherImageData);
