@@ -20,7 +20,7 @@ window.filters.push({
 		tempData = Filters.brightnessContrast(tempData, -0.1, 1);
 		tempData = Filters.gaussianBlur(tempData, 10);
 		tempData = Filters.screenBlend(tempData, otherImageData);
-				 tempData = Filters.screenBlend(tempData, otherImageData);
+
 		tempContext.putImageData(tempData, 0, 0);
 		// imageData = Filters.gaussianBlur(imageData, 10);
 		// imageData = Filters.sobel(imageData);
