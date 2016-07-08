@@ -5,15 +5,11 @@ var video = document.createElement('video');
 video.style.width = 'auto';
 video.style.height = 'auto';
 video.class = 'video';
-video.src = 'https://danmana.github.io/RealityFilter/videos/Waves%20-%201893.mp4'
+//video.src = 'https://danmana.github.io/RealityFilter/videos/Waves%20-%201893.mp4'
+video.src = 'videos/beach3.mp4'
 video.loop = 'loop';
 video.play();
 
-/*var video = document.createElement('img');
-video.src = 'img/6.jpg';
-video.style.width = 'auto';
-video.style.height = 'auto';
-*/
 
 var c2 = null;
 var c2ctx = null;
