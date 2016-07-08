@@ -7,6 +7,7 @@ var
   contextBuffer,
   filters = [],
   currentFilter = 0,
+  contrast,
   MOCK_VIDEO = '/videos/Shopping Mall - 1887.mp4';
 
   var leapController =  Leap.loop({enableGestures: true}, function(frame){
@@ -21,7 +22,7 @@ function init() {
 container = document.getElementById('webglviewer');
 
 // setInterval(function(){
-//     currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
+//      currentFilter = (filters.length > currentFilter+1) ? currentFilter+1 : 0;
 // }, 6000);
 
 leapController.on("gesture", function(gesture) {

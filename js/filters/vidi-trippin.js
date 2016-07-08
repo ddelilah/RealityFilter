@@ -16,11 +16,12 @@ window.filters.push({
 		var	otherImageData = Filters.sobel(imageData);
 		var tempData = tempContext.getImageData(0,0,imageData.width, imageData.height);
 
-tempData = Filters.brightnessContrast(tempData,-0.1,1);
-tempData = Filters.gaussianBlur(tempData, 10);
-tempData = Filters.screenBlend(tempData, otherImageData);
-		 tempData = Filters.screenBlend(tempData, otherImageData);
-tempContext.putImageData(tempData, 0, 0);
+
+		tempData = Filters.brightnessContrast(tempData, -0.1, 1);
+		tempData = Filters.gaussianBlur(tempData, 10);
+		tempData = Filters.screenBlend(tempData, otherImageData);
+				 tempData = Filters.screenBlend(tempData, otherImageData);
+		tempContext.putImageData(tempData, 0, 0);
 		// imageData = Filters.gaussianBlur(imageData, 10);
 		// imageData = Filters.sobel(imageData);
 		imageData = Filters.differenceBlend(imageData, tempData);
